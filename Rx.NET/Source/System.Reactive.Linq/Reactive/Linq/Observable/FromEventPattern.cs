@@ -122,7 +122,7 @@ namespace System.Reactive.Linq.ObservableImpl
                 }
                 catch (TargetInvocationException tie)
                 {
-                    throw tie.InnerException;
+                    tie.InnerException.ThrowIfNotNull();
                 }
 
                 return Disposable.Create(() =>
@@ -133,7 +133,7 @@ namespace System.Reactive.Linq.ObservableImpl
                     }
                     catch (TargetInvocationException tie)
                     {
-                        throw tie.InnerException;
+                        tie.InnerException.ThrowIfNotNull();
                     }
                 });
             }

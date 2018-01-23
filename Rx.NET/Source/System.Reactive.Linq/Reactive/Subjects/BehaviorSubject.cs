@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved. See License.txt in the project root for license information.
 
 using System.Reactive.Disposables;
+using System.Runtime.ExceptionServices;
 
 namespace System.Reactive.Subjects
 {
@@ -33,10 +34,7 @@ namespace System.Reactive.Subjects
                 {
                     CheckDisposed();
 
-                    if (_exception != null)
-                    {
-                        throw _exception;
-                    }
+                    _exception.ThrowIfNotNull();
 
                     return _value;
                 }
